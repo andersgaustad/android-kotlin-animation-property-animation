@@ -113,11 +113,18 @@ class MainActivity : AppCompatActivity() {
             disableViewUnderAnimation(scaleButton)
 
             start()
-
         }
     }
 
     private fun fader() {
+        val animator = ObjectAnimator.ofFloat(star, View.ALPHA, 0f).apply {
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+            disableViewUnderAnimation(fadeButton)
+
+            start()
+        }
+
     }
 
     private fun colorizer() {
