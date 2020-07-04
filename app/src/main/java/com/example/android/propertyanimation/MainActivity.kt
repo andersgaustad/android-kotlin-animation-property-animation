@@ -16,15 +16,14 @@
 
 package com.example.android.propertyanimation
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+import android.animation.*
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -148,8 +147,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun shower() {
         val container = star.parent as ViewGroup
+
         val containerW = container.width
         val containerH = container.height
 
@@ -162,9 +164,53 @@ class MainActivity : AppCompatActivity() {
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
             )
+
+            scaleX = Math.random().toFloat() * 1.5f + .1f
+            scaleY = scaleX
+            starW *= scaleX
+            starH *= scaleY
+
+            translationX = Math.random().toFloat() * containerW - starW / 2
+        }
+
+        val mover = ObjectAnimator.ofFloat(
+            newStar,
+            View.TRANSLATION_Y,
+            -starH,
+            containerH + starH
+
+        ).apply {
+            interpolator = AccelerateInterpolator(1f)
+        }
+
+        val rotator = ObjectAnimator.ofFloat(
+            newStar,
+            View.ROTATION,
+            (Math.random() * 1000).toFloat()
+
+        ).apply {
+            interpolator = LinearInterpolator()
         }
 
         container.addView(newStar)
+
+        // AnimatorSet
+        val set = AnimatorSet().apply {
+            playTogether(mover, rotator)
+            duration = (Math.random() * 1500 + 500).toLong()
+
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    super.onAnimationEnd(animation)
+                    container.removeView(newStar)
+
+                }
+
+            })
+
+            start()
+        }
+
     }
 
     // Private:
