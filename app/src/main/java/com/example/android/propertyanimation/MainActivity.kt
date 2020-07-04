@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rotater() {
-        val animator = ObjectAnimator.ofFloat(
+        ObjectAnimator.ofFloat(
             star,
             View.ROTATION,
             -360.0f,
@@ -84,24 +84,22 @@ class MainActivity : AppCompatActivity() {
         ).apply {
             duration = 1000
 
-            // Listener
-            addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
-                    super.onAnimationStart(animation)
-                    rotateButton.isEnabled = false
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    super.onAnimationEnd(animation)
-                    rotateButton.isEnabled = true
-                }
-            })
+            disableViewUnderAnimation(rotateButton)
 
             start()
         }
     }
 
     private fun translater() {
+        ObjectAnimator.ofFloat(star, View.TRANSLATION_X, 200f).apply {
+            repeatCount = 1
+            repeatMode = ObjectAnimator.REVERSE
+
+            disableViewUnderAnimation(translateButton)
+
+            start()
+        }
+
     }
 
     private fun scaler() {
@@ -114,6 +112,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shower() {
+    }
+
+    // Private:
+
+    private fun ObjectAnimator.disableViewUnderAnimation(view: View) {
+        addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                view.isEnabled = false
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                view.isEnabled = true
+            }
+        })
     }
 
 }
