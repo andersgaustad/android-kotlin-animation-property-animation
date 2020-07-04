@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import com.google.samples.propertyanimation.R
+import com.example.android.propertyanimation.R.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,15 +35,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout.activity_main)
 
-        star = findViewById(R.id.star)
-        rotateButton = findViewById<Button>(R.id.rotateButton)
-        translateButton = findViewById<Button>(R.id.translateButton)
-        scaleButton = findViewById<Button>(R.id.scaleButton)
-        fadeButton = findViewById<Button>(R.id.fadeButton)
-        colorizeButton = findViewById<Button>(R.id.colorizeButton)
-        showerButton = findViewById<Button>(R.id.showerButton)
+        star = findViewById(id.star)
+        rotateButton = findViewById(id.rotateButton)
+        translateButton = findViewById(id.translateButton)
+        scaleButton = findViewById(id.scaleButton)
+        fadeButton = findViewById(id.fadeButton)
+        colorizeButton = findViewById(id.colorizeButton)
+        showerButton = findViewById(id.showerButton)
 
         rotateButton.setOnClickListener {
             rotater()

@@ -16,7 +16,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.google.samples.propertyanimation">
+          package="com.example.android.propertyanimation">
 
     <application
             android:allowBackup="true"
