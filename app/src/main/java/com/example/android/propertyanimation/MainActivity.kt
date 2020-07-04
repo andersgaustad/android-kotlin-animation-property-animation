@@ -24,8 +24,11 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import com.example.android.propertyanimation.R.*
 
 
@@ -146,6 +149,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shower() {
+        val container = star.parent as ViewGroup
+        val containerW = container.width
+        val containerH = container.height
+
+        var starW = star.width.toFloat()
+        var starH = star.height.toFloat()
+
+        val newStar = AppCompatImageView(this).apply {
+            setImageResource(R.drawable.ic_star)
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+        container.addView(newStar)
     }
 
     // Private:
